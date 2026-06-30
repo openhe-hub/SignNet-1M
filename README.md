@@ -21,7 +21,7 @@ are not included in this directory.
 ## Layout
 
 ```text
-codebase/
+SignNet-1M/
   configs/
     signnet_augmentation.yaml       # Paper-facing augmentation axes and defaults
   scripts/
