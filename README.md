@@ -44,7 +44,7 @@ Create an environment with Python 3.10+ and install the lightweight public
 dependencies:
 
 ```bash
-pip install -e ./codebase
+pip install -e .
 pip install opencv-python numpy tqdm pyyaml
 ```
 
@@ -77,9 +77,9 @@ experiments:
 ## 1. Plan Augmentation Jobs
 
 ```bash
-python codebase/scripts/plan_augmentation.py \
+python scripts/plan_augmentation.py \
   --manifest data/manifests/train.jsonl \
-  --config codebase/configs/signnet_augmentation.yaml \
+  --config configs/signnet_augmentation.yaml \
   --output outputs/signnet_jobs.jsonl
 ```
 
@@ -99,7 +99,7 @@ The returned object must implement the protocol documented in
 `signnet/augmentation/render_pipeline.py`.
 
 ```bash
-python codebase/scripts/run_render_backend.py \
+python scripts/run_render_backend.py \
   --jobs outputs/signnet_jobs.jsonl \
   --backend-module my_backend.signnet_adapter \
   --model-path /path/to/avatar/model \
@@ -113,7 +113,7 @@ Supported render modes are `fixed_viewpoint`, `dynamic_viewpoint`, and
 ## 3. Apply Post-Rendering Augmentations
 
 ```bash
-python codebase/scripts/run_post_rendering.py \
+python scripts/run_post_rendering.py \
   --input-root outputs/rendered \
   --output-root outputs/post_rendered \
   --num-tasks 8 \
