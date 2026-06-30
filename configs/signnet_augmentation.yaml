@@ -1,0 +1,35 @@
+release:
+  name: SignNet-1M
+  paper: ECCV 2026
+  background_replacement_status: planned_release
+
+render_axes:
+  fixed_viewpoint:
+    output_suffix: fixed_viewpoint_video.mp4
+    levels:
+      - {name: yaw_left, yaw: -0.35, pitch: 0.0, zoom: 1.0}
+      - {name: yaw_right, yaw: 0.35, pitch: 0.0, zoom: 1.0}
+      - {name: pitch_up, yaw: 0.0, pitch: 0.30, zoom: 1.0}
+      - {name: pitch_down, yaw: 0.0, pitch: -0.30, zoom: 1.0}
+      - {name: zoom_in, yaw: 0.0, pitch: 0.0, zoom: 0.90}
+      - {name: zoom_out, yaw: 0.0, pitch: 0.0, zoom: 1.10}
+  dynamic_viewpoint:
+    yaw_range: 0.35
+    pitch_range: 0.30
+    zoom_range: 0.10
+    frequency: 1
+  cross_identity:
+    keep_source_camera: false
+
+post_rendering:
+  spatial_color:
+    num_augmentations: 25
+    seed: 42
+  temporal:
+    num_augmentations: 7
+    seed: 42
+
+splits:
+  train: 0.8
+  val: 0.1
+  test: 0.1
