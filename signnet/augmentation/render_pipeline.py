@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import dataclasses
+import warnings
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Protocol
@@ -47,6 +49,8 @@ class RenderJob:
     mode: str
     tracked_dir: str
     output_video: str
+    level: str | None = None
+    seed: int | None = None
     source_identity_dir: str | None = None
     yaw: float = 0.0
     pitch: float = 0.0
@@ -56,6 +60,20 @@ class RenderJob:
     dyn_zoom_range: float = 0.0
     dyn_freq: int = 1
     keep_source_camera: bool = False
+
+    @classmethod
+    def from_row(cls, row: dict) -> "RenderJob":
+        """Build a job from a planner row, ignoring keys this version does not know."""
+
+        fields = {f.name for f in dataclasses.fields(cls)}
+        unknown = set(row) - fields
+        if unknown:
+            warnings.warn(
+                f"ignoring unknown render job fields: {sorted(unknown)}",
+                RuntimeWarning,
+                stacklevel=2,
+            )
+        return cls(**{k: v for k, v in row.items() if k in fields})
 
 
 def build_camera_schedule(job: RenderJob, backend: SignNetRenderBackend, motion_clip) -> CameraSchedule | None:
@@ -120,6 +138,7 @@ def run_render_jobs(
             {
                 "clip_id": job.clip_id,
                 "mode": job.mode,
+                "level": job.level,
                 "tracked_dir": job.tracked_dir,
                 "source_identity_dir": job.source_identity_dir,
                 "output_video": str(output_video),

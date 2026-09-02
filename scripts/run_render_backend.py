@@ -25,7 +25,7 @@ def main() -> None:
     args = parse_args()
     module = importlib.import_module(args.backend_module)
     backend = module.create_backend(model_path=args.model_path, device=args.device)
-    jobs = [RenderJob(**row) for row in read_jsonl(args.jobs)]
+    jobs = [RenderJob.from_row(row) for row in read_jsonl(args.jobs)]
     metadata_path = args.metadata or f"{args.output_root}/render_metadata.jsonl"
     run_render_jobs(jobs=jobs, backend=backend, output_root=args.output_root, metadata_path=metadata_path)
 

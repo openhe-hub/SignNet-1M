@@ -3,17 +3,33 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "signnet-codebase"
+name = "signnet-1m"
 version = "0.1.0"
-description = "Reference augmentation code for SignNet-1M."
+description = "Reference augmentation pipeline for SignNet-1M (ECCV 2026)."
 readme = "README.md"
 requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [
+  {name = "Zhewen He", email = "zh3510@nyu.edu"},
+  {name = "Junyi Hu"},
+  {name = "Haomian Huang"},
+  {name = "Zhenhua Li"},
+  {name = "Yu-Shen Liu"},
+  {name = "Yi Fang", email = "yf23@nyu.edu"},
+]
+keywords = ["sign-language", "dataset", "augmentation", "3d-gaussian-splatting"]
 dependencies = [
   "numpy>=1.23",
   "opencv-python>=4.8",
   "pyyaml>=6.0",
   "tqdm>=4.66",
 ]
+
+[project.urls]
+Homepage = "https://signnet.chatsign.ai/"
+Paper = "https://arxiv.org/abs/2606.24361"
+Dataset = "https://drive.google.com/drive/folders/1Wc43peMNvbkyQ_VGgqi9vdYjA_0Fc3HX"
+Repository = "https://github.com/openhe-hub/SignNet-1M"
 
 [tool.setuptools.packages.find]
 where = ["."]

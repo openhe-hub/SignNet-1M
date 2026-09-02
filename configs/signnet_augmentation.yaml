@@ -1,3 +1,16 @@
+# SignNet-1M augmentation axes.
+#
+# The fixed_viewpoint ladder below is the one used to produce the public
+# How2Sign release (350,530 clips, 10 levels). Its envelope was recovered from
+# the released params/*.jsonl and is linear in radians from level01 to level10:
+#   yaw   +/- 0.15 -> 0.52 rad  ( +/- 8.6 deg -> 29.8 deg )
+#   pitch +/- 0.10 -> 0.40 rad  ( +/- 5.7 deg -> 22.9 deg )
+#   zoom  [0.95, 1.10] -> [0.90, 1.50]
+# The paper states the ladder as |yaw| up to 30 deg and |pitch| up to 25 deg;
+# the shipped data reaches 29.8 deg yaw and 22.9 deg pitch.
+#
+# All angles are RADIANS. zoom is a scale factor (>1 moves the camera closer).
+
 release:
   name: SignNet-1M
   paper: ECCV 2026
@@ -6,19 +19,30 @@ release:
 render_axes:
   fixed_viewpoint:
     output_suffix: fixed_viewpoint_video.mp4
+    # Per clip and level, yaw / pitch / zoom are drawn uniformly from the
+    # envelope with a seed derived from (seed, clip_id, level), so a manifest
+    # always expands to the same jobs.
+    sampling: uniform
+    seed: 42
     levels:
-      - {name: yaw_left, yaw: -0.35, pitch: 0.0, zoom: 1.0}
-      - {name: yaw_right, yaw: 0.35, pitch: 0.0, zoom: 1.0}
-      - {name: pitch_up, yaw: 0.0, pitch: 0.30, zoom: 1.0}
-      - {name: pitch_down, yaw: 0.0, pitch: -0.30, zoom: 1.0}
-      - {name: zoom_in, yaw: 0.0, pitch: 0.0, zoom: 0.90}
-      - {name: zoom_out, yaw: 0.0, pitch: 0.0, zoom: 1.10}
+      - {name: level01, yaw_abs_max: 0.1500, pitch_abs_max: 0.1000, zoom_min: 0.9500, zoom_max: 1.1000}   # +/-8.6 deg yaw, +/-5.7 deg pitch
+      - {name: level02, yaw_abs_max: 0.1911, pitch_abs_max: 0.1333, zoom_min: 0.9444, zoom_max: 1.1444}   # +/-10.9 deg yaw, +/-7.6 deg pitch
+      - {name: level03, yaw_abs_max: 0.2322, pitch_abs_max: 0.1667, zoom_min: 0.9389, zoom_max: 1.1889}   # +/-13.3 deg yaw, +/-9.5 deg pitch
+      - {name: level04, yaw_abs_max: 0.2733, pitch_abs_max: 0.2000, zoom_min: 0.9333, zoom_max: 1.2333}   # +/-15.7 deg yaw, +/-11.5 deg pitch
+      - {name: level05, yaw_abs_max: 0.3144, pitch_abs_max: 0.2333, zoom_min: 0.9278, zoom_max: 1.2778}   # +/-18.0 deg yaw, +/-13.4 deg pitch
+      - {name: level06, yaw_abs_max: 0.3556, pitch_abs_max: 0.2667, zoom_min: 0.9222, zoom_max: 1.3222}   # +/-20.4 deg yaw, +/-15.3 deg pitch
+      - {name: level07, yaw_abs_max: 0.3967, pitch_abs_max: 0.3000, zoom_min: 0.9167, zoom_max: 1.3667}   # +/-22.7 deg yaw, +/-17.2 deg pitch
+      - {name: level08, yaw_abs_max: 0.4378, pitch_abs_max: 0.3333, zoom_min: 0.9111, zoom_max: 1.4111}   # +/-25.1 deg yaw, +/-19.1 deg pitch
+      - {name: level09, yaw_abs_max: 0.4789, pitch_abs_max: 0.3667, zoom_min: 0.9056, zoom_max: 1.4556}   # +/-27.4 deg yaw, +/-21.0 deg pitch
+      - {name: level10, yaw_abs_max: 0.5200, pitch_abs_max: 0.4000, zoom_min: 0.9000, zoom_max: 1.5000}   # +/-29.8 deg yaw, +/-22.9 deg pitch
   dynamic_viewpoint:
+    output_suffix: dynamic_viewpoint_video.mp4
     yaw_range: 0.35
     pitch_range: 0.30
     zoom_range: 0.10
     frequency: 1
   cross_identity:
+    output_suffix: cross_identity_video.mp4
     keep_source_camera: false
 
 post_rendering:

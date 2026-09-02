@@ -1,0 +1,46 @@
+cff-version: 1.2.0
+message: "If you use SignNet-1M, please cite the ECCV 2026 paper."
+title: "SignNet-1M: Large-Scale Multilingual Sign Language Video Dataset with Downstream Benchmarks"
+type: software
+url: "https://signnet.chatsign.ai/"
+repository-code: "https://github.com/openhe-hub/SignNet-1M"
+license: MIT
+authors:
+  - family-names: He
+    given-names: Zhewen
+    affiliation: New York University Abu Dhabi
+    email: zh3510@nyu.edu
+  - family-names: Hu
+    given-names: Junyi
+    affiliation: New York University Abu Dhabi
+  - family-names: Huang
+    given-names: Haomian
+    affiliation: New York University Abu Dhabi
+  - family-names: Li
+    given-names: Zhenhua
+    affiliation: New York University Abu Dhabi
+  - family-names: Liu
+    given-names: Yu-Shen
+    affiliation: Tsinghua University
+  - family-names: Fang
+    given-names: Yi
+    affiliation: New York University Abu Dhabi
+    email: yf23@nyu.edu
+preferred-citation:
+  type: conference-paper
+  title: "SignNet-1M: Large-Scale Multilingual Sign Language Video Dataset with Downstream Benchmarks"
+  collection-title: "European Conference on Computer Vision (ECCV)"
+  year: 2026
+  authors:
+    - family-names: He
+      given-names: Zhewen
+    - family-names: Hu
+      given-names: Junyi
+    - family-names: Huang
+      given-names: Haomian
+    - family-names: Li
+      given-names: Zhenhua
+    - family-names: Liu
+      given-names: Yu-Shen
+    - family-names: Fang
+      given-names: Yi
